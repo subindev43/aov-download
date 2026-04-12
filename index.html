@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -217,11 +216,86 @@
       overflow: hidden;
     }
 
-    .hero-card img {
+    .hero-slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+    }
+
+    .hero-slider-track {
+      display: flex;
+      transition: transform .35s ease;
+      will-change: transform;
+    }
+
+    .preview-tile {
+      min-width: 100%;
+    }
+
+    .preview-tile img {
       display: block;
       width: 100%;
       border-radius: 24px;
       border: 1px solid rgba(255,255,255,.5);
+    }
+
+    .preview-label {
+      margin-top: 10px;
+      text-align: center;
+      font-size: .92rem;
+      font-weight: 700;
+      color: #315296;
+    }
+
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(255,255,255,.55);
+      border-radius: 999px;
+      background: rgba(255,255,255,.78);
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 16px 30px rgba(37, 99, 235, 0.16);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .slider-arrow:hover {
+      transform: translateY(-50%) scale(1.05);
+      background: rgba(255,255,255,.92);
+    }
+
+    .slider-arrow.prev { left: 14px; }
+    .slider-arrow.next { right: 14px; }
+
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .slider-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      border: 0;
+      background: rgba(49, 82, 150, .28);
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .slider-dot.active {
+      background: #315296;
+      transform: scale(1.15);
     }
 
     .float-chip {
@@ -529,7 +603,9 @@
       .float-chip {
         position: static;
         margin-top: 14px;
-        display: inline-block;
+        display: block;
+        width: 100%;
+        text-align: center;
       }
     }
 
@@ -546,6 +622,15 @@
       .action-row { display: grid; }
       .button { width: 100%; }
       .button_lg { text-align: center; }
+      .slider-arrow {
+        width: 40px;
+        height: 40px;
+      }
+      .slider-arrow.prev { left: 10px; }
+      .slider-arrow.next { right: 10px; }
+      .slider-dots {
+        margin-top: 10px;
+      }
     }
   </style>
 </head>
@@ -556,9 +641,9 @@
   <div class="wrap">
     <nav class="nav">
       <a class="brand" href="#top">
-        <img src="./icon.jpg" alt="Icon ứng dụng" onerror="this.src='https://via.placeholder.com/50';" />
+        <img src="./ios.jpg" alt="Logo iOS" onerror="this.src='https://via.placeholder.com/50';" />
         <div class="brand-text">
-          <strong>Menu Subin 1.0</strong>
+          <strong>SUBIN DEV</strong>
           <span>Trang tải IPA</span>
         </div>
       </a>
@@ -568,9 +653,9 @@
     <section class="hero" id="top">
       <div class="hero-copy">
         <div class="pill">Uy Tín • Thân Thiện • Lắng Nghe</div>
-        <h1>Menu Subin 1.0</h1>
+        <h1>Thông Tin</h1>
         <p>
-          Menu Subin 1.0 đã được cập nhật tại Liên Quân IOS mùa mới nhất 2026 và anh em có thể tải IPA và liên hệ Zalo với ADMIN để cấp key kích hoạt nhé.
+          Tôi Đã Cập Nhật Menu Honor Of Kings Cho Phiên Bản Game Mới Nhất Vui Lòng Tải Và Liên Hệ ADMIN Để Mua Key.
         </p>
         <div class="hero-actions">
           <a class="btn" href="#download">Xem link tải IPA</a>
@@ -580,11 +665,28 @@
 
       <div class="hero-visual">
         <div class="hero-card">
-          <img src="./menu.jpg" alt="Ảnh menu" onerror="this.src='https://via.placeholder.com/400x250';" />
+          <div class="hero-slider" id="heroSlider">
+            <button class="slider-arrow prev" type="button" aria-label="Xem menu trước">&#10094;</button>
+            <div class="hero-slider-track">
+              <div class="preview-tile">
+                <img src="./menu.jpg" alt="Ảnh menu 1" onerror="this.src='https://via.placeholder.com/400x250';" />
+                <div class="preview-label">Hack Liên Quân</div>
+              </div>
+              <div class="preview-tile">
+                <img src="./menu2.jpg" alt="Ảnh menu 2" onerror="this.src='https://via.placeholder.com/400x250';" />
+                <div class="preview-label">Hack Honor Of Kings</div>
+              </div>
+            </div>
+            <button class="slider-arrow next" type="button" aria-label="Xem menu tiếp theo">&#10095;</button>
+            <div class="slider-dots" aria-label="Chọn menu xem trước">
+              <button class="slider-dot active" type="button" aria-label="Xem menu 1"></button>
+              <button class="slider-dot" type="button" aria-label="Xem menu 2"></button>
+            </div>
+          </div>
         </div>
         <div class="float-chip">
-          <strong>Ảnh menu</strong>
-          <span>Xem trước giao diện</span>
+          <strong>2 ảnh menu</strong>
+          <span>Xem trước cả hai giao diện</span>
         </div>
       </div>
     </section>
@@ -598,7 +700,7 @@
         <div class="download-box">
           <img src="./icon.jpg" alt="Icon app" />
           <div class="meta">
-            <h2>Menu Subin 1.0</h2>
+            <h2>Menu Sbin</h2>
             <p>Bản hiện tại - Liên Quân iOS 2026</p>
           </div>
         </div>
@@ -619,7 +721,32 @@
         </div>
       </div>
 
-      <!-- COPY CARD NÀY ĐỂ THÊM IPA 2 -->
+
+      <!-- CARD 2 -->
+      <div class="ipa-card">
+        <div class="download-box">
+          <img src="./icon2.jpg" alt="Icon app 2" />
+          <div class="meta">
+            <h2>Menu Subin x HOK</h2>
+            <p>Bản IPA 2 - Honor of Kings iOS</p>
+          </div>
+        </div>
+
+        <img class="preview-img" src="./menu2.jpg" alt="Menu preview 2" />
+
+        <div class="action-row">
+          <a href="https://drive.google.com/uc?export=download&id=1QdcBBYxK1j7rDaf-XjL0h8kGRLfKsRZa" target="_blank">
+            <button class="button">
+              <span class="button_lg">
+                <span class="button_sl"></span>
+                <span class="button_text">Download IPA 2</span>
+              </span>
+            </button>
+          </a>
+
+          <a class="btn btn-outline" href="https://zalo.me/0964074609" target="_blank">Zalo</a>
+        </div>
+      </div>
 
     </section>
 
@@ -627,5 +754,42 @@
       Subin IOS • Vui lòng tải IPA và liên hệ Zalo để cấp key kích hoạt.
     </footer>
   </div>
+  <script>
+    (function () {
+      const slider = document.getElementById('heroSlider');
+      if (!slider) return;
+
+      const track = slider.querySelector('.hero-slider-track');
+      const slides = Array.from(slider.querySelectorAll('.preview-tile'));
+      const prevBtn = slider.querySelector('.slider-arrow.prev');
+      const nextBtn = slider.querySelector('.slider-arrow.next');
+      const dots = Array.from(slider.querySelectorAll('.slider-dot'));
+      let currentIndex = 0;
+
+      function renderSlider() {
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentIndex);
+        });
+      }
+
+      prevBtn.addEventListener('click', function () {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        renderSlider();
+      });
+
+      nextBtn.addEventListener('click', function () {
+        currentIndex = (currentIndex + 1) % slides.length;
+        renderSlider();
+      });
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', function () {
+          currentIndex = index;
+          renderSlider();
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
